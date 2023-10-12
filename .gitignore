@@ -1,0 +1,6 @@
+# Project exclude paths
+/fpis/project/target/
+/fpis/target/
+/fpis/target/scala-3.3.1/classes/
+/project/target/
+/target/
