@@ -10,8 +10,8 @@ object SortedList:
     @tailrec
     def helper(n: Int): Boolean =
       if n == as.length - 2 then
-        !gt(as(n), as.last)
-      else if gt(as(n), as(n + 1)) then
+        gt(as(n), as.last)
+      else if !gt(as(n), as(n + 1)) then
         false
       else helper(n + 1)
 
