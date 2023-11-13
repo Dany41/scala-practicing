@@ -1,8 +1,16 @@
 # Project exclude paths
+/project/target/
+/target/
+/.idea/
+
+# fpis module
 /fpis/project/target/
 /fpis/target/
 /fpis/target/scala-3.3.1/classes/
 /fpis/.idea/
-/project/target/
-/target/
-/.idea/
+
+# spark module
+/spark/project/target/
+/spark/target/
+/spark/target/scala-3.3.1/classes/
+/spark/.idea/
