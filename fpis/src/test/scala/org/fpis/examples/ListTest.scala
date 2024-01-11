@@ -1,7 +1,7 @@
 package org.fpis.examples
 
 import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest._
+import org.scalatest.*
 
 class ListTest extends AnyFlatSpec {
 
@@ -41,6 +41,20 @@ class ListTest extends AnyFlatSpec {
     assert(List.product(List(1)) == 1)
     assert(List.product(List(1, 2)) == 2)
     assert(List.product(List(1, 2, 0)) == 0)
+  }
+
+  "length" should "return correctly lengths for Lists" in {
+    assert(List.length(List()) == 0)
+    assert(List.length(List(1)) == 1)
+    assert(List.length(List(1, 2)) == 2)
+    assert(List.length(List(1, 2, 0)) == 3)
+  }
+
+  "reverse" should "return correctly reverse Lists" in {
+    assert(List.reverse(List()) == List())
+    assert(List.reverse(List(1)) == List(1))
+    assert(List.reverse(List(1, 2)) == List(2, 1))
+    assert(List.reverse(List(1, 2, 0)) == List(0, 2, 1))
   }
 
 }

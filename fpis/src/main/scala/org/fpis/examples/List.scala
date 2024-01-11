@@ -12,14 +12,9 @@ object List:
     if as.isEmpty then Nil
     else Cons(as.head, apply(as.tail*))
 
-  def sum(ints: List[Int], acc: Int = 0): Int = ints match
-    case List.Nil => acc
-    case List.Cons(head, tail) => sum(tail, head + acc)
+  def sum(ints: List[Int]): Int = foldLeft(ints, 0, _ + _)
 
-  def product(doubles: List[Double], acc: Double = 1): Double = doubles match
-    case List.Nil => acc
-    case List.Cons(0.0, _) => 0.0
-    case List.Cons(head, tail) => product(tail, head * acc)
+  def product(doubles: List[Double]): Double = foldLeft(doubles, 1, _ * _)
 
   def tail[A](l: List[A]): List[A] = l match
     case List.Cons(_, tail) => tail
@@ -27,7 +22,7 @@ object List:
 
   def setHead[A](h: A, xs: List[A]): List[A] = xs match
     case List.Cons(_, t) => Cons(h, t)
-    case List.Nil => sys.error("Nil has no elements")
+    case List.Nil => Cons(h, Nil)
 
   @tailrec
   def drop[A](as: List[A], n: Int): List[A] =
@@ -50,6 +45,17 @@ object List:
     case List.Nil | List.Cons(_, Nil) => List.Nil
     case List.Cons(head, Cons(_, Nil)) => List.Cons(head, Nil)
     case List.Cons(head, tail) => List.Cons(head, init(tail))
+
+  def foldRight[A, B](as: List[A], acc: B, f: (A, B) => B): B = foldLeft(reverse(as), acc, f)
+
+  def length[A](as: List[A]): Int = foldLeft(as, 0, (_, i) => i + 1)
+
+  @tailrec
+  def foldLeft[A, B](as: List[A], acc: B, f: (A, B) => B): B = as match
+    case List.Nil => acc
+    case List.Cons(head, tail) => foldLeft(tail, f(head, acc), f)
+
+  def reverse[A](as: List[A], acc: List[A] = List()): List[A] = foldLeft(as, List[A](), (el, l) => Cons(el, l))
 
   val result = List(1, 2, 3, 4, 5) match
     case Cons(x, Cons(2, Cons(4, _))) => x
