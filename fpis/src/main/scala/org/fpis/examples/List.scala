@@ -1,5 +1,7 @@
 package org.fpis.examples
 
+import scala.annotation.tailrec
+
 
 enum List[+A]:
   case Nil
@@ -10,14 +12,14 @@ object List:
     if as.isEmpty then Nil
     else Cons(as.head, apply(as.tail*))
 
-  def sum(ints: List[Int]): Int = ints match
-    case List.Nil => 0
-    case List.Cons(head, tail) => head + sum(tail)
+  def sum(ints: List[Int], acc: Int = 0): Int = ints match
+    case List.Nil => acc
+    case List.Cons(head, tail) => sum(tail, head + acc)
 
-  def product(doubles: List[Double]): Double = doubles match
-    case List.Nil => 1
+  def product(doubles: List[Double], acc: Double = 1): Double = doubles match
+    case List.Nil => acc
     case List.Cons(0.0, _) => 0.0
-    case List.Cons(head, tail) => head * product(tail)
+    case List.Cons(head, tail) => product(tail, head * acc)
 
   def tail[A](l: List[A]): List[A] = l match
     case List.Cons(_, tail) => tail
@@ -27,12 +29,14 @@ object List:
     case List.Cons(_, t) => Cons(h, t)
     case List.Nil => sys.error("Nil has no elements")
 
+  @tailrec
   def drop[A](as: List[A], n: Int): List[A] =
     if n == 0 then as
     else as match
       case List.Cons(head, tail) => drop(tail, n - 1)
       case List.Nil => as
 
+  @tailrec
   def dropWhile[A](as: List[A], f: A => Boolean): List[A] = as match
       case List.Cons(head, tail) if f(head) => dropWhile(tail, f)
       case List.Nil | List.Cons(_, _) => as
