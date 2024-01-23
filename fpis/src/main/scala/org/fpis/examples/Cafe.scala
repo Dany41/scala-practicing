@@ -1,5 +1,7 @@
 package org.fpis.examples
 
+import scala.collection.immutable.List
+
 class Cafe:
   def buyCoffee(cc: CreditCard): (Coffee, Charge) =
     val cup = Coffee()
