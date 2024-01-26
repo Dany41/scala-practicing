@@ -12,6 +12,14 @@ object ISBN13 {
       None
     }
   }
+  
+  def unapply(i: Int): CustomWrapper[Int] = {
+    CustomWrapperFrilled[Int](1)
+  }
+  
+  def unapply(i: Long): CustomWrapper[Long] = {
+    CustomWrapperEmpty
+  }
 
 
 }
