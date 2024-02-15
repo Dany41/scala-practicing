@@ -3,7 +3,6 @@ package bigdataessentials_rtj.columnsandexpressions
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{col, expr}
-import org.spark.bigdataessentials_rtj.columnsandexpressions.ColumnsAndExpressions.spark
 
 /**
  * - Read Movies DF
@@ -39,7 +38,7 @@ object ColumnsAndExpressionsExercise extends App {
   val moviesDFWithProfit = moviesDF.withColumn("Total Profit", expr("US_Gross + Worldwide_Gross - Production_Budget"))
   moviesDFWithProfit.select("Title", "Total Profit").show()
 
-  val filteredMovies = moviesDF.where("IMDB_Rating > 6")
-  filteredMovies.select("Title", "IMDB_Rating").show()
+  val filteredMovies = moviesDF.where("IMDB_Rating > 6 and Major_Genre = 'Comedy'")
+  filteredMovies.select("Title", "IMDB_Rating", "Major_Genre").show()
 
 }
