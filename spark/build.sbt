@@ -11,3 +11,4 @@ lazy val root = (project in file("."))
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.17" % "test"
 libraryDependencies += "org.apache.spark" %% "spark-core" % "3.5.0"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.5.0"
+libraryDependencies += "org.postgresql" % "postgresql" % "42.7.3"
