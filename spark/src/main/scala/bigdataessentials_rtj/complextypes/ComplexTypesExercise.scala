@@ -17,7 +17,6 @@ object ComplexTypesExercise extends App {
     .option("inferSchema", "true")
     .csv("spark/src/main/resources/data/stocks.csv")
 
-  // date pattern is not working
-  stocksDf.select(col("symbol"), to_date(col("date"), "MMM dd YYYY"), col("price"))
+  stocksDf.select(col("symbol"), to_date(col("date"), "MMM d yyyy"), col("price")).show
 
 }
